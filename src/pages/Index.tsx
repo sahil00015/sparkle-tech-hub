@@ -16,18 +16,18 @@ const Index = () => {
       {/* Hero Section */}
       <section className="relative h-[600px] flex items-center justify-center overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-fade-in"
           style={{ backgroundImage: `url(${heroImage})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background/90 to-background/50" />
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 animate-slide-up">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent animate-float">
             Premium Electronics
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Discover the latest in technology with our curated collection of premium laptops, smartphones, and accessories
           </p>
-          <Button size="lg" className="text-lg px-8 py-4">
+          <Button size="lg" className="text-lg px-8 py-4 hover:scale-105 transition-transform duration-200">
             Shop Now <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>
@@ -37,27 +37,19 @@ const Index = () => {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4">
-                <Truck className="h-8 w-8 text-primary" />
+            {[
+              { icon: Truck, title: "Free Shipping", desc: "Free shipping on orders over $99" },
+              { icon: Shield, title: "2-Year Warranty", desc: "Comprehensive warranty on all products" },
+              { icon: Headphones, title: "24/7 Support", desc: "Expert support whenever you need it" }
+            ].map((feature, index) => (
+            <div key={feature.title} className="text-center animate-slide-up" style={{ animationDelay: `${index * 200}ms` }}>
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4 hover:scale-110 transition-transform duration-300">
+                <feature.icon className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Free Shipping</h3>
-              <p className="text-muted-foreground">Free shipping on orders over $99</p>
+              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+              <p className="text-muted-foreground">{feature.desc}</p>
             </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4">
-                <Shield className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">2-Year Warranty</h3>
-              <p className="text-muted-foreground">Comprehensive warranty on all products</p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4">
-                <Headphones className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">24/7 Support</h3>
-              <p className="text-muted-foreground">Expert support whenever you need it</p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -76,13 +68,15 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {featuredProducts.map((product, index) => (
+              <div key={product.id} className="animate-slide-up" style={{ animationDelay: `${index * 150}ms` }}>
+                <ProductCard product={product} />
+              </div>
             ))}
           </div>
           
-          <div className="text-center mt-12">
-            <Button variant="outline" size="lg">
+          <div className="text-center mt-12 animate-fade-in">
+            <Button variant="outline" size="lg" className="hover:scale-105 transition-transform duration-200">
               View All Products <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
